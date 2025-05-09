@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animations & Local Storage</title>
+    <style>
+        /* Button Animation */
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: red;
+            transform: scale(1.1);
+        }
+
+        /* Animated Box */
+        #animatedBox {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: transform 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body onload="applyPreference()">
+    <h2>Interactive Animation & Local Storage</h2>
+
+    <!-- Theme Button -->
+    <button onclick="savePreference('lightblue')">Save Light Blue Theme</button>
+
+    <!-- Animation Button -->
+    <button id="animateButton">Animate Box</button>
+
+    <!-- Animated Box -->
+    <div id="animatedBox"></div>
+
+    <script>
+        /* Save User Preference */
+        function savePreference(color) {
+            localStorage.setItem("preferredColor", color);
+            document.body.style.backgroundColor = color;
+        }
+
+        /* Apply Stored Preference */
+        function applyPreference() {
+            const savedColor = localStorage.getItem("preferredColor");
+            if (savedColor) {
+                document.body.style.backgroundColor = savedColor;
+            }
+        }
+
+        /* Trigger Animation */
+        document.getElementById("animateButton").addEventListener("click", function() {
+            let box = document.getElementById("animatedBox");
+            box.style.transform = "rotate(180deg)";
+        });
+    </script>
+</body>
+</html>
